@@ -10,6 +10,7 @@ import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 
@@ -26,11 +27,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         val fab = findViewById(R.id.fab) as FloatingActionButton
         fab.setOnClickListener {
-            if (navigationView.headerCount >= 1) {
-                navigationView.removeHeaderView(navigationView.getHeaderView(0))
-            }else {
-                navigationView.inflateHeaderView(R.layout.nav_header_main)
+
+            Log.d("menu", navigationView.menu.getItem(0).toString())
+
+            if (navigationView.menu.getItem(0).toString() == "Gallery") {
+                navigationView.menu.clear()
+                navigationView.inflateMenu(R.menu.activity_main_drawer)
+            } else {
+                navigationView.menu.clear()
+                navigationView.inflateMenu(R.menu.test)
             }
+
         }
 
         val drawer = findViewById(R.id.drawer_layout) as DrawerLayout
